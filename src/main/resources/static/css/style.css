@@ -1,0 +1,25 @@
+@charset "ISO-8859-1";
+
+body{
+	background-color: lightgrey;
+}	
+
+.container{
+	margin: 0px auto;
+	width: 50%;
+}	
+
+.header{
+	display: flex;
+	justify-content: space-between;
+}
+
+.forms{
+	display: flex;
+	gap: 300px;
+	margin-top: 50px;
+}
+
+.errors{
+	color: red;
+}
