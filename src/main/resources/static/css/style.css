@@ -23,3 +23,8 @@ body{
 .errors{
 	color: red;
 }
+
+#textarea{
+	width: 500px;
+	margin-left:10px;
+}

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Home</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css"> 
 <script src="/webjars/jquery/jquery.min.js"></script>
@@ -16,30 +16,32 @@
 </head>
 <body>
 	<div class = "container">
-		<h1>Welcome <c:out value="${userName}"></c:out></h1>
-		<a href="/create/book">Add a Book to Your library</a>
-	</div>
-	<div>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Title</th>
-					<th>Author Name</th>
-					<th>Posted By</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="book" items="${bookList}">
+		<div style="display: flex; justify-content: space-between; align-items: center;">
+			<h1>Welcome <c:out value="${userName}"></c:out></h1>
+				<a href="/create/book">Add a Book to Your library</a>
+		</div>
+		<div>
+			<table class = "table table-hover">
+				<thead>
 					<tr>
-						<td>${book.id }</td>
-						<td><a href="/book/${book.id}">${book.title }</a></td>
-						<td>${book.author }</td>
-						<td></td>
+						<th>ID</th>
+						<th>Title</th>
+						<th>Author Name</th>
+						<th>Posted By</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var="book" items="${bookList}">
+						<tr>
+							<td>${book.id }</td>
+							<td><a href="/book/${book.id}">${book.title }</a></td>
+							<td>${book.author }</td>
+							<td>${book.user.userName}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

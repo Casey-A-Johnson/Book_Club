@@ -16,7 +16,17 @@
 </head>
 <body>
 	<div class = "container">
-		
+		<div style="display: flex; justify-content: space-between; align-items: center;">
+			<h1>${oneBook.title }</h1>
+			<a href="/home">Go back</a>
+		</div>
+		<div>
+			<h3>${oneBook.user.userName } read ${oneBook.title } by ${oneBook.author }</h3>
+			<h3>Here are ${oneBook.user.userName }'s thoughts:</h3>
+		</div>
+		<div>
+			${oneBook.thoughts }
+		</div>
 	</div>
 </body>
 </html>

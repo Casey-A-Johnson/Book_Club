@@ -36,9 +36,9 @@
 						<form:errors class= "errors"  path = "author"/>
 					</div>
 				</div>
-				<div class="mb-3">
+				<div class="mb-3" style="display: flex; align-items: center; ">
 					<form:label class="form-label" path = "thoughts">My thoughts</form:label>
-					<form:textarea class="form-label" path = "thoughts"></form:textarea>
+					<form:textarea class="form-label" path = "thoughts" id ="textarea"></form:textarea>
 					<div>
 						<form:errors class= "errors"  path = "thoughts"/>
 					</div>
