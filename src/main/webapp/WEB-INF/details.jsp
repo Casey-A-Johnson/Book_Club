@@ -21,11 +21,24 @@
 			<a href="/home">Go back</a>
 		</div>
 		<div>
-			<h3>${oneBook.user.userName } read ${oneBook.title } by ${oneBook.author }</h3>
-			<h3>Here are ${oneBook.user.userName }'s thoughts:</h3>
+			<c:choose>
+				<c:when test="${oneBook.user.id == userId }">
+					<h3>You read ${oneBook.title } by ${oneBook.author }</h3>
+					<h3>Here are your thoughts:</h3>
+				</c:when>
+				<c:otherwise>
+					<h3>${oneBook.user.userName } read ${oneBook.title } by ${oneBook.author }</h3>
+					<h3>Here are ${oneBook.user.userName }'s thoughts:</h3>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div>
 			${oneBook.thoughts }
+		</div>
+		<div>
+			<c:if test="${oneBook.user.id == userId}">
+				<a href="/book/${oneBook.id }/edit">Edit</a>
+			</c:if>
 		</div>
 	</div>
 </body>

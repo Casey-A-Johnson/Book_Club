@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.caseyjohnson.bookclub1.models.Book;
@@ -99,9 +100,33 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/book/{id}")
-	public String showBook(@PathVariable("id")Long id, Model model) {
+	public String showBook(@PathVariable("id")Long id, Model model, HttpSession session) {
 		Book foundBook = userService.oneBook(id);
 		model.addAttribute("oneBook",foundBook);
 		return"details.jsp";
+	}
+	
+	@RequestMapping("/book/{id}/edit")
+	public String editBook(@PathVariable("id")Long id, Model model) {
+		model.addAttribute("book", userService.oneBook(id));
+		return "editBook.jsp";
+	}
+	
+	@PutMapping("/book/{id}/edit")
+	public String processEdit(
+			@Valid
+			@ModelAttribute("book")Book book,
+			BindingResult result,
+			HttpSession session
+			) {
+		if(session.getAttribute("userId")== null) {
+			return"redirect:/login";
+		}
+		if(result.hasErrors()) {
+			return "editBook.jsp";
+		} else {
+			userService.updateBook(book);
+			return "redirect:/home";
+		}
 	}
 }

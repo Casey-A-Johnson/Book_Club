@@ -82,4 +82,9 @@ public class UserService {
 		}
 	}
 	
+	//---update Book
+	public Book updateBook(Book book) {
+		return bookRepo.save(book);
+	}
+	
 }
