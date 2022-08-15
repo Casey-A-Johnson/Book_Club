@@ -62,6 +62,11 @@ public class UserService {
 		return user;
 	}
 	
+	//---find user-----
+	public User findUser(Long id) {
+		return userRepo.findById(id).orElse(null);
+	}
+	
 	//----Get all books-------
 	public List<Book> allBooks(){
 		return bookRepo.findAll();
@@ -87,4 +92,8 @@ public class UserService {
 		return bookRepo.save(book);
 	}
 	
+	// ----delete Book
+	public void deleteBook(Long id) {
+		bookRepo.deleteById(id);
+	}
 }

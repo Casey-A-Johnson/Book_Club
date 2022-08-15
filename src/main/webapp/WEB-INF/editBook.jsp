@@ -45,6 +45,7 @@
 					</div>
 				</div>
 				<form:hidden path="user" value="${book.user.id }"/>
+				<form:hidden path="borrower" value="${book.borrower.id }"/>	
 					<button  class="btn btn-outline-success" type= "submit">Update book</button>
 			</form:form>
 		</div>

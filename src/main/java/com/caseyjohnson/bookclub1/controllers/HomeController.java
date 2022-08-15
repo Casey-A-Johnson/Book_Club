@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,8 +75,14 @@ public class HomeController {
 		if(session.getAttribute("userId")== null) {
 			return"redirect:/login";
 		}
+		User user = userService.findUser((Long)session.getAttribute("userId"));
+		List<Book> borrowedBook = user.getBorrower(); // creating a list of borrowed Books
 		List<Book> allBooks= userService.allBooks();
 		model.addAttribute("bookList", allBooks);
+		// use a condition to check if there are any borrowed books and set the value into a variable called borrowed
+		Boolean borrowed = false;
+		borrowed = borrowedBook.size() > 0 ? true : false;
+		model.addAttribute("borrowedBooks", borrowed); // add list of borrowed books into the model
 		return "home.jsp";
 	}
 	
@@ -128,5 +135,37 @@ public class HomeController {
 			userService.updateBook(book);
 			return "redirect:/home";
 		}
+	}
+	
+	@PutMapping("/book/{id}/borrow")
+	public String borrowBook(@PathVariable("id")Long id, HttpSession session) {
+		if(session.getAttribute("userId")== null) {
+			return"redirect:/login";
+		}
+		User user= userService.findUser((Long)session.getAttribute("userId"));
+		Book book = userService.oneBook(id);
+		book.setBorrower(user);
+		userService.updateBook(book);
+		return "redirect:/home";
+	}
+	
+	@PutMapping("book/{id}/return")
+	public String returnBook(@PathVariable("id")Long id, HttpSession session) {
+		if(session.getAttribute("userId")== null) {
+			return"redirect:/login";
+		}
+		Book book = userService.oneBook(id);
+		book.setBorrower(null);
+		userService.updateBook(book);
+		return "redirect:/home";
+		
+	}
+	
+	@DeleteMapping("/book/{id}/delete")
+	public String deleteBook(
+			@PathVariable("id") Long id
+			) {
+		userService.deleteBook(id);
+		return "redirect:/home";
 	}
 }

@@ -49,7 +49,12 @@ public class User {
     
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Book> books;
-  
+    
+    
+    @OneToMany(mappedBy="borrower", fetch = FetchType.LAZY)
+    private List<Book> borrower;
+    
+    
     public User() {}
     
     // TODO - Don't forget to generate getters and setters
@@ -110,6 +115,23 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
     
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	public List<Book> getBorrower() {
+		return borrower;
+	}
+
+	public void setBorrower(List<Book> borrower) {
+		this.borrower = borrower;
+	}
+
 	@PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
