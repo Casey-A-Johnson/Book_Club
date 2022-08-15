@@ -49,6 +49,12 @@
 					<button  class="btn btn-outline-success" type= "submit">Update book</button>
 			</form:form>
 		</div>
+		<div>
+			<form action="/book/${book.id }/delete" method="post">
+				<input type= "hidden" name="_method" value="delete"/>
+				<button class="btn btn-outline-danger" type="submit">Delete</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

@@ -18,7 +18,7 @@
 	<div class = "container">
 		<div style="display: flex; justify-content: space-between; align-items: center;">
 			<h1>Welcome <c:out value="${userName}"></c:out></h1>
-				<a href="/create/book">Add a Book to Your library</a>
+			<a href="/create/book">Add a Book to Your library</a>
 		</div>
 		<div>
 			<table class = "table table-hover">
@@ -54,7 +54,7 @@
 											<c:otherwise>
 												<form action="/book/${book.id}/borrow" method="post">
 													<input type= "hidden" name= "_method" value = "put"/>
-													<button type="submit">Borrow</button>
+													<button class="btn btn-outline-success" type="submit">Borrow</button>
 												</form>
 											</c:otherwise>
 										</c:choose>
@@ -66,9 +66,10 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
+		<div style="margin-top: 100px;">
 		<!-- // use list of borrowedBooks to check if the borrowed value is true. If true display table. -->
 			<c:if test="${borrowedBooks == true }"> 
+				<h2>Books I'm borrowing</h2>
 				<table class = "table table-hover">
 					<thead>
 						<tr>
@@ -91,7 +92,7 @@
 										<td>
 											<form action="/book/${book.id}/return" method="post">
 												<input type= "hidden" name= "_method" value = "put"/>
-												<button type="submit">Return</button>
+												<button class="btn btn-outline-info" type="submit">Return</button>
 											</form>
 										</td>
 									</tr>
@@ -101,6 +102,9 @@
 					</tbody>
 				</table>
 			</c:if>
+		</div>
+		<div>
+			<a class="btn btn-outline-secondary" href="/logout">Logout</a>
 		</div>
 	</div>
 </body>
